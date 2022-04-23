@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModels="clr-namespace:FlashCards.ViewModels"
+             x:Class="FlashCards.Views.Groups"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    
+    <ContentPage.BindingContext>
+        <viewModels:GroupViewModel/>
+    </ContentPage.BindingContext>
+    <Shell.SearchHandler>
+        <SearchHandler SearchBoxVisibility="Collapsible" Placeholder="Search.." TextColor="Black" Query="{Binding Query, Mode=OneWayToSource}" BackgroundColor="White" PlaceholderColor="{StaticResource SystemGray}" FontFamily="Roboto"/>
+    </Shell.SearchHandler>
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center"  Orientation="Horizontal">
+            <Label TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Groups" FontFamily="Roboto" FontSize="Medium"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout Padding="20,10">
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Margin="5,0,180,0">
+                    <Label TextColor="{StaticResource SecondaryColor}" Text="Your Groups" FontFamily="Roboto" FontSize="Medium" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="&#xf055;" FontFamily="FAS6" TextColor="{StaticResource Main}" FontSize="30">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CreateGroup}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+            <CollectionView x:Name="GroupListView" ItemsSource="{Binding Groups}" Margin="0,30,0,0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItemView Command="{Binding Source={x:Reference GroupListView}, Path=BindingContext.EditGroup}" CommandParameter="{Binding .}" BackgroundColor="{StaticResource BackgroundColor}" >
+                                        <StackLayout Padding="10" WidthRequest="50">
+                                            <Label VerticalOptions="CenterAndExpand" FontSize="25" Text="&#xf31c;" FontFamily="FAS6" TextColor="{StaticResource Main}" HorizontalOptions="CenterAndExpand" />
+                                        </StackLayout>
+                                    </SwipeItemView>
+                                    <SwipeItemView Command="{Binding Source={x:Reference GroupListView}, Path=BindingContext.RemoveGroup}" CommandParameter="{Binding .}" BackgroundColor="{StaticResource BackgroundColor}">
+                                        <StackLayout Padding="10" WidthRequest="50">
+                                            <Label VerticalOptions="CenterAndExpand" FontSize="25" Text="&#xf1f8;" FontFamily="FAS6" TextColor="{StaticResource Main}" BackgroundColor="{StaticResource BackgroundColor}" HorizontalOptions="CenterAndExpand" />
+                                        </StackLayout>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <yummy:PancakeView BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="1,0">
+                                <yummy:PancakeView.BackgroundGradientStops>
+                                    <yummy:GradientStopCollection>
+                                        <yummy:GradientStop Color="#577399" Offset="0" />
+                                        <yummy:GradientStop Color="#DC879C" Offset="0.96" />
+                                    </yummy:GradientStopCollection>
+                                </yummy:PancakeView.BackgroundGradientStops> 
+                                <Grid MinimumHeightRequest="50" Padding="10">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference GroupListView}, Path=BindingContext.ShowTopics}" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" FontSize="40" Text="&#xe185;" FontFamily="FAS6" TextColor="White"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" FontSize="18" Text="{Binding Title}" FontFamily="Roboto" TextColor="White" LineBreakMode="TailTruncation"/>
+                                    <Label Grid.Row="0" HorizontalTextAlignment="Center" Grid.Column="2" FontSize="20" Text="{Binding Topics.Count}" FontFamily="FAS6" TextColor="White"/>
+                                    <Label Grid.Row="1" HorizontalTextAlignment="Center" Grid.Column="2" FontSize="15" Text="Topics" FontFamily="Roboto" TextColor="White"/>
+                                </Grid>
+                            </yummy:PancakeView>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashCards.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="SecondaryColor">#495867</Color>
+            <Color x:Key="BackgroundColor">#F7F7FF</Color>
+            <Color x:Key="Main">#FF144F</Color>
+            <Color x:Key="SystemGray">#AEAEAE</Color>
+            <!--
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="Shell.ForegroundColor" Value="White"/>
+                <Setter Property="Shell.TitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Main}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource SystemGray}"/>
+            </Style>
+            -->
+            <Style TargetType="Button" x:Key="AuthButton">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="TextTransform" Value="Uppercase"/>
+                <Setter Property="CornerRadius" Value="40"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource Main}"/>
+            </Style>
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>

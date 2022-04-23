@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModels="clr-namespace:FlashCards.ViewModels"
+             x:Class="FlashCards.Views.CreateTopicModal"
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.BindingContext>
+        <viewModels:CreateTopicModalViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="8">
+            <Label Text="Create a new topic!" TextColor="Black" FontFamily="Roboto" FontSize="25" HorizontalOptions="StartAndExpand"/>
+            <Entry Margin="0,50,0,0" Text="{Binding TopicTitle}" Placeholder="Title" PlaceholderColor="{StaticResource SystemGray}" FontFamily="Roboto" TextColor="Black" />
+            <Editor Margin="0,100,0,0" AutoSize="TextChanges" Text="{Binding TopicDescription}" Placeholder="Description" PlaceholderColor="{StaticResource SystemGray}" FontFamily="Roboto" TextColor="Black" />
+            <StackLayout Padding="8" Spacing="20" HorizontalOptions="FillAndExpand" Margin="0,350,0,0">
+                <Button Command="{Binding SaveTopic}" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="Center" Text="&#xf00c;" TextColor="White" FontFamily="FAS6" FontSize="25" BackgroundColor="{StaticResource Main}" CornerRadius="25"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

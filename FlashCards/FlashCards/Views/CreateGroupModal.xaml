@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModels="clr-namespace:FlashCards.ViewModels"
+             x:Class="FlashCards.Views.CreateGroupModal"
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.BindingContext>
+        <viewModels:CreateGroupModalViewModel/>
+    </ContentPage.BindingContext>
+  <ContentPage.Content>
+        <StackLayout Margin="20,90" Padding="30,70">
+            <Label Margin="0,0,0,20" Text="&#x2b;" HorizontalOptions="CenterAndExpand" FontSize="50" TextColor="{StaticResource SecondaryColor}" FontFamily="FAS6" />
+            <Label TextColor="Black" FontFamily="Roboto" HorizontalOptions="CenterAndExpand" Text="Create a New Group." FontSize="Medium" Margin="0,0,0,40"/>
+            <Entry Text="{Binding GroupName}" FontFamily="Roboto" Placeholder="Group Title" PlaceholderColor="{StaticResource SystemGray}" TextColor="Black"/>
+            <Button Command="{Binding SaveGroup}" Margin="0,40,0,20" Text="Create" Style="{StaticResource AuthButton}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

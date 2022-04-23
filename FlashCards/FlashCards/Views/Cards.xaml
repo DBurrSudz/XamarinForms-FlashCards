@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModels="clr-namespace:FlashCards.ViewModels"
+             x:Class="FlashCards.Views.Cards"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Shell.BackgroundColor="{StaticResource BackgroundColor}"
+             Shell.ForegroundColor="{StaticResource SecondaryColor}">
+
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center"  Orientation="Horizontal">
+            <Label TextColor="{StaticResource SecondaryColor}" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="{Binding TopicTitle}" LineBreakMode="TailTruncation" FontFamily="Roboto" FontSize="20"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <viewModels:CardsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20,10">
+            <Label x:Name="test" FontSize="10" TextColor="{StaticResource SecondaryColor}"/>
+            <Label HorizontalOptions="StartAndExpand" Text="Progress" FontFamily="Roboto" TextColor="{StaticResource SecondaryColor}" FontSize="18" />
+            <ProgressBar Progress="{Binding Progress}" Margin="0,1,0,0" ProgressColor="{StaticResource Main}"/>
+            <Label Margin="0,0,0,5" HorizontalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontSize="15" TextColor="{StaticResource Main}" Text="{Binding CurrentCardIndex}" FontFamily="Roboto"/>
+                        <Span FontSize="15" TextColor="{StaticResource SystemGray}" FontFamily="Roboto" Text="/"/>
+                        <Span FontSize="15" TextColor="{StaticResource SystemGray}" FontFamily="Roboto" Text="{Binding TotalCards}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Switch x:Name="timerSwitch" Toggled="OnToggled" HorizontalOptions="EndAndExpand" OnColor="{StaticResource SystemGray}" ThumbColor="{StaticResource Main}"/>
+            <Label Text="Timer" HorizontalOptions="EndAndExpand" FontFamily="Roboto" TextColor="{StaticResource SecondaryColor}"/>
+            <CarouselView CurrentItemChanged="ItemChanged" PositionChangedCommand="{Binding HandlePositionChanged}" IsBounceEnabled="False" CurrentItem="{Binding CurrentCard,Mode=OneWayToSource}" Position="{Binding CurrentCardIndex,Mode=OneWayToSource}" Margin="0,2,0,0" x:Name="CardList" ItemsSource="{Binding Cards}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame x:Name="FrontView" Padding="8" BackgroundColor="#a4c9eb" HeightRequest="400">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FlipToBack"/>
+                                </Frame.GestureRecognizers>
+                                <StackLayout Padding="4">
+                                    <Label HorizontalOptions="StartAndExpand" Text="&#xf005;" FontSize="20" TextColor="Gold" FontFamily="FAS6">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="AddCardToFavourites"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="Question:" FontFamily="Roboto" TextColor="#577399" HorizontalOptions="CenterAndExpand" FontSize="Medium"/>
+                                    <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding Heading}" FontFamily="Roboto" TextColor="#577399" FontSize="20"/>
+                                    <Label FontSize="25" Text="&#xf028;" FontFamily="FAS6" TextColor="#577399">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference CardList}, Path=BindingContext.TextToSpeechCardFront}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                            <Frame IsVisible="False" x:Name="BackView" Padding="8" BackgroundColor="#a4c9eb" HeightRequest="400">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FlipToFront"/>
+                                </Frame.GestureRecognizers>
+                                <StackLayout Padding="4">
+                                    <Label Text="Answer!" FontFamily="Roboto" TextColor="#577399" HorizontalOptions="CenterAndExpand" FontSize="Medium"/>
+                                    <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding Content}" FontFamily="Roboto" TextColor="#577399" FontSize="20"/>
+                                    <Label FontSize="25" Text="&#xf028;" FontFamily="FAS6" TextColor="#577399">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference CardList}, Path=BindingContext.TextToSpeechCardBack}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Grid Padding="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Button HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0" Command="{Binding CreateCard}" FontSize="20" Text="&#x2b;" FontFamily="FAS6" WidthRequest="50" HeightRequest="50" BackgroundColor="{StaticResource Main}" TextColor="White" CornerRadius="25"/>
+                <Button Grid.Row="0" Command="{Binding EditCard}" Grid.Column="1" FontSize="20" Text="&#xf044;" FontFamily="FAS6" HorizontalOptions="CenterAndExpand" WidthRequest="50" HeightRequest="50" BackgroundColor="{StaticResource Main}" TextColor="White" CornerRadius="25"/>
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding RemoveCard}" FontSize="20" Text="&#xf1f8;" FontFamily="FAS6" HorizontalOptions="CenterAndExpand" WidthRequest="50" HeightRequest="50" BackgroundColor="{StaticResource Main}" TextColor="White" CornerRadius="25"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

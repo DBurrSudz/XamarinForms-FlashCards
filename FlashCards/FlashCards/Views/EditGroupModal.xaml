@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModels="clr-namespace:FlashCards.ViewModels" xmlns:cardviewnetstandard="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
+             x:Class="FlashCards.Views.EditGroupModal"
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <ContentPage.BindingContext>
+        <viewModels:EditGroupModalViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="8">
+            <Label Text="Edit Group" TextColor="Black" FontFamily="Roboto" FontSize="25" HorizontalOptions="StartAndExpand"/>
+            <Editor Margin="0,100,0,0" AutoSize="TextChanges" Text="{Binding GroupTitle}" Placeholder="Description" PlaceholderColor="{StaticResource SystemGray}" FontFamily="Roboto" TextColor="Black" />
+            <StackLayout Padding="8" Spacing="20" HorizontalOptions="FillAndExpand" Margin="0,350,0,0">
+                <Button Command="{Binding Cancel}" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="Center" Text="&#xf00d;" TextColor="White" FontFamily="FAS6" FontSize="25" BackgroundColor="{StaticResource Main}" CornerRadius="25"/>
+                <Button Command="{Binding SaveGroup}" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="Center" Text="&#xf00c;" TextColor="White" FontFamily="FAS6" FontSize="25" BackgroundColor="{StaticResource Main}" CornerRadius="25"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

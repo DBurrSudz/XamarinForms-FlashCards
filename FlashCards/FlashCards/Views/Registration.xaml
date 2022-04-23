@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashCards.Views.Registration"
+             FlowDirection="RightToLeft"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center"  Orientation="Horizontal">
+            <Label TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Sign Up!" FontFamily="Roboto" FontSize="Medium"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout Padding="30,50">
+            <Label Margin="0,0,0,20" Text="&#xf5fd;" HorizontalOptions="CenterAndExpand" FontSize="50" TextColor="{StaticResource SecondaryColor}" FontFamily="FAS6" />
+            <Label TextColor="Black" FontFamily="Roboto" HorizontalOptions="CenterAndExpand" Text="Register Now!" FontSize="Medium" Margin="0,0,0,40"/>
+            <Label FontFamily="Roboto" FontSize="Medium" Text="Email" TextColor="Black" />
+            <Entry x:Name="Email" FontFamily="Roboto" Placeholder="Email address" PlaceholderColor="{StaticResource SystemGray}" TextColor="Black"/>
+            <Label FontFamily="Roboto" FontSize="Medium" Text="Password" TextColor="Black"/>
+            <Entry x:Name="Password" FontFamily="Roboto" IsPassword="True" Placeholder="Password" PlaceholderColor="{StaticResource SystemGray}" TextColor="Black"/>
+            <Label FontFamily="Roboto" FontSize="Medium" Text="Confirm password" TextColor="Black"/>
+            <Entry x:Name="ConfirmPassword" FontFamily="Roboto" IsPassword="True" Placeholder="Confirm password" PlaceholderColor="{StaticResource SystemGray}" TextColor="Black"/>
+            <Button Clicked="RegisterUser" Margin="0,40,0,20" Text="Sign Up!" Style="{StaticResource AuthButton}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

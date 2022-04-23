@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:FlashCards.Views"
+       Title="FlashCards"
+       x:Class="FlashCards.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="Shell.ForegroundColor" Value="White"/>
+                <Setter Property="Shell.TitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Main}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource SystemGray}"/>
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            </Style>
+            <!--
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+            -->
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            
+           
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar Route="Login">
+        <ShellContent ContentTemplate="{DataTemplate local:Login}" />
+    </TabBar>
+ <!--
+    <TabBar Route="Registration">
+        <ShellContent ContentTemplate="{DataTemplate local:Registration}"/>
+    </TabBar>
+    -->
+    <TabBar Route="Home">
+        <Tab Title="Home" Route="Groups" Icon="house_solid.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Groups}" />
+        </Tab>
+        <Tab Title="Stats" Route="Statistics" Icon="square_poll_vertical_solid.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Stats}" />
+        </Tab>
+        <Tab Title="Favourites" Route="Favourites" Icon="star_solid.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Favourites}" />
+        </Tab>
+        <Tab Title="Logout" Route="Hello" Icon="arrow_right_from_bracket_solid.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Groups}" />
+        </Tab>
+    </TabBar>
+</Shell>

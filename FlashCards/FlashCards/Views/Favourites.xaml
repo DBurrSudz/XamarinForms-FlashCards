@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModels="clr-namespace:FlashCards.ViewModels"
+             x:Class="FlashCards.Views.Favourites"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center"  Orientation="Horizontal">
+            <Label TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Favourites" LineBreakMode="TailTruncation" FontFamily="Roboto" FontSize="20"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <viewModels:FavouritesViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20,10">
+            <Label HorizontalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="&#xf005; " FontSize="20" TextColor="Gold" FontFamily="FAS6" />
+                        <Span TextColor="{StaticResource SecondaryColor}" FontSize="17" FontFamily="Roboto" Text="{Binding TotalCards}"/>
+                        <Span TextColor="{StaticResource SecondaryColor}" FontSize="17" FontFamily="Roboto" Text=" Cards"/>
+                        <Span Text=" &#xf005;" FontSize="20" TextColor="Gold" FontFamily="FAS6" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <CollectionView x:Name="FavouritesListView" ItemsSource="{Binding Cards}" Margin="0,30,0,0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="5">
+                            <yummy:PancakeView BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="1,0" HeightRequest="100" CornerRadius="10,10,10,10" Padding="20">
+                                <yummy:PancakeView.Shadow>
+                                    <yummy:DropShadow Color="#000000" Offset="100,100" />
+                                </yummy:PancakeView.Shadow>
+                                <yummy:PancakeView.BackgroundGradientStops>
+                                    <yummy:GradientStopCollection>
+                                        <yummy:GradientStop Color="#577399" Offset="0" />
+                                        <yummy:GradientStop Color="#DC879C" Offset="0.96" />
+                                    </yummy:GradientStopCollection>
+                                </yummy:PancakeView.BackgroundGradientStops>
+                                <StackLayout IsClippedToBounds="True">
+                                    <Label HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="&#xf005; " TextColor="White" FontFamily="FAS6"/>
+                                                <Span Text="{Binding Heading}" TextColor="White" FontFamily="Roboto" FontSize="18"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <BoxView HeightRequest="2" BackgroundColor="White"></BoxView>
+                                    <Label Text="{Binding Content}" HorizontalOptions="StartAndExpand" TextColor="White" FontSize="18" FontFamily="Roboto" LineBreakMode="TailTruncation"/>
+                                    <Label FontFamily="FAS6" Text="&#xf1f8;" TextColor="White" HorizontalOptions="EndAndExpand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="CardRemoved" Command="{Binding Source={x:Reference FavouritesListView}, Path=BindingContext.RemoveCardFromFavourite}" CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </yummy:PancakeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

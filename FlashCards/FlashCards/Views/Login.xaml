@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashCards.Views.Login"
+             BackgroundColor="{StaticResource BackgroundColor}">
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+            <Label Text="Login" FontFamily="Roboto" TextTransform="Uppercase" FontSize="Title" HorizontalOptions="CenterAndExpand" TextColor="White" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <StackLayout Padding="30,50">
+            <Label Margin="0,0,0,20" Text="&#xf5fd;" HorizontalOptions="CenterAndExpand" FontSize="50" TextColor="{StaticResource SecondaryColor}" FontFamily="FAS6" />
+            <Label TextColor="Black" FontFamily="Roboto" HorizontalOptions="CenterAndExpand" Text="Please sign in to continue." FontSize="Medium" Margin="0,0,0,40"/>
+            <Label FontFamily="Roboto" FontSize="Medium" Text="Email" TextColor="Black" />
+            <Entry x:Name="Email" FontFamily="Roboto" Placeholder="Email address" PlaceholderColor="{StaticResource SystemGray}" TextColor="Black"/>
+            <Label FontFamily="Roboto" FontSize="Medium" Text="Password" TextColor="Black"/>
+            <Entry x:Name="Password" FontFamily="Roboto" IsPassword="True" Placeholder="Password" PlaceholderColor="{StaticResource SystemGray}" TextColor="Black"/>
+            <Button Clicked="AuthenticateUser" Margin="0,40,0,20" Text="Login" Style="{StaticResource AuthButton}"/>
+            <Button Clicked="ShowRegistration" Text="Sign Up" Style="{StaticResource AuthButton}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
